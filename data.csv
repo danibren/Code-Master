@@ -1,0 +1,20 @@
+   *** Test Cases ***;${username};${password}
+    Login Success;student;Password123
+    Login Fail 1;player;IncorrectPassword
+    Login Fail 2;admin;IncorrectPassword
+    Login Fail 3;technician;IncorrectPassword
+    Login Fail 4;teacher;IncorrectPassword
+    Login Fail 5;staff;IncorrectPassword
+    Login Fail 6;business;IncorrectPassword
+    Login Fail 7;employee;IncorrectPassword
+    Login Fail 8;women;IncorrectPassword
+    Login Fail 9;men;IncorrectPassword
+    Login Fail 10;people;IncorrectPassword
+    Login Fail 11;king;IncorrectPassword
+    Login Fail 12;queen;IncorrectPassword
+    Login Fail 13;athlete;IncorrectPassword
+    Login Fail 14;wiseman;IncorrectPassword
+    Login Fail 15;police;IncorrectPassword
+    Login Fail 16;army;IncorrectPassword
+    Login Fail 17;lawyer;IncorrectPassword
+    Login Fail 18;starter;IncorrectPassword
