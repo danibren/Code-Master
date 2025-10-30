@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.14.0 on win32)" generated="2025-10-30T09:49:45.615638" rpa="false" schemaversion="5">
+<suite id="s1" name="Quote Unit Test" source="C:\Users\Public\code-folder\Code-Master\web_ai\quote_unit_test.robot">
+<test id="s1-t1" name="Verify Quote Display" line="10">
+<kw name="Open Browser To Quote Page">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-10-30T09:49:46.309015" level="INFO">Opening browser 'Chrome' to base url 'file:///c:/Users/Public/code-folder/Code-Master/web_ai/quote_daily.html'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-10-30T09:49:46.308385" elapsed="6.627466"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>1200</arg>
+<arg>800</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2025-10-30T09:49:52.936310" elapsed="0.463329"/>
+</kw>
+<status status="PASS" start="2025-10-30T09:49:46.306495" elapsed="7.093517"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-10-30T09:49:53.407850" level="INFO">Clicking button 'id:generate-classic-btn'.</msg>
+<arg>id:generate-classic-btn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-10-30T09:49:53.406962" elapsed="0.286992"/>
+</kw>
+<kw name="Quote And Author Should Be Displayed">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id:quote-text</arg>
+<arg>timeout=10</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-10-30T09:49:53.713265" elapsed="0.187891"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id:quote-author</arg>
+<arg>timeout=10</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-10-30T09:49:53.901533" elapsed="0.037485"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-10-30T09:49:53.939659" level="INFO">Length is 13.</msg>
+<arg>id:quote-text</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-10-30T09:49:53.939377" elapsed="0.000397"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-10-30T09:49:53.940230" level="INFO">Length is 15.</msg>
+<arg>id:quote-author</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-10-30T09:49:53.940010" elapsed="0.000346"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-10-30T09:49:53.940599" elapsed="2.651891"/>
+</kw>
+<status status="PASS" start="2025-10-30T09:49:53.709871" elapsed="2.882997"/>
+</kw>
+<status status="PASS" start="2025-10-30T09:49:46.304003" elapsed="10.289565"/>
+</test>
+<status status="PASS" start="2025-10-30T09:49:45.619165" elapsed="10.976855"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Quote Unit Test" id="s1" pass="1" fail="0" skip="0">Quote Unit Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

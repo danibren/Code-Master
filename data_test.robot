@@ -8,7 +8,7 @@ Test Template    Login With Credentials
 ${URL_LOGIN}     https://practicetestautomation.com/practice-test-login/
 ${BROWSER}    Chrome
 
-*** Test Case ***
+*** Test Cases ***
 Login with user ${username} and password ${password}    Default    UserData
 
 ***Keywords***
