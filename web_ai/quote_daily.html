@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,29 @@
     <style>
         /* Apply Inter font */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f1f5f9; /* Light slate background */
+            background-color: #f1f5f9;
+            /* Light slate background */
         }
+
         /* Custom styling for a vibrant, shadow effect on the card */
         #quote-card {
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
+
         /* Style for buttons */
         .btn-base {
             transition: all 0.15s ease-in-out;
             cursor: pointer;
         }
+
         .btn-base:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
+
         .loading-spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
             border-top: 4px solid #fff;
@@ -35,12 +42,19 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body class="min-h-screen flex items-center justify-center p-4">
 
     <div id="app" class="w-full max-w-3xl text-center">
@@ -49,7 +63,8 @@
             Daily <span class="text-indigo-600">Boost</span>
         </h1>
 
-        <div id="quote-card" class="bg-white p-8 md:p-12 rounded-2xl border border-gray-100 transition-all duration-300 opacity-100">
+        <div id="quote-card"
+            class="bg-white p-8 md:p-12 rounded-2xl border border-gray-100 transition-all duration-300 opacity-100">
 
             <!-- Loading Indicator -->
             <div id="loading-indicator" class="hidden flex justify-center items-center h-20">
@@ -74,37 +89,31 @@
 
         <!-- Button Section -->
         <div class="mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            
-            <button id="generate-classic-btn"
-                    class="btn-base px-6 py-3 bg-gray-500 text-white font-bold rounded-full text-base tracking-wider
+
+            <button id="generate-classic-btn" class="btn-base px-6 py-3 bg-gray-500 text-white font-bold rounded-full text-base tracking-wider
                            shadow-lg shadow-gray-500/50 hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-300
-                           active:bg-gray-700"
-                    onclick="generateClassicQuote()">
+                           active:bg-gray-700" onclick="generateClassicQuote()">
                 Classic Quotes
             </button>
 
-            <button id="generate-gemini-random-btn"
-                    class="btn-base px-6 py-3 bg-indigo-600 text-white font-bold rounded-full text-base tracking-wider
+            <button id="generate-gemini-random-btn" class="btn-base px-6 py-3 bg-indigo-600 text-white font-bold rounded-full text-base tracking-wider
                            shadow-lg shadow-indigo-500/50 hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300
-                           active:bg-indigo-800"
-                    onclick="generateGeminiQuoteRandom()">
+                           active:bg-indigo-800" onclick="generateGeminiQuoteRandom()">
                 ✨ Generate Random Quote
             </button>
 
         </div>
-        
+
         <!-- Topic Generation Section -->
         <div class="mt-12 p-6 bg-white rounded-xl shadow-lg border border-indigo-100">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Topic Focus</h2>
             <div class="flex flex-col sm:flex-row gap-3">
                 <input type="text" id="topic-input" placeholder="e.g., resilience, coding, nature"
-                       class="flex-grow p-3 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
-                
-                <button id="generate-gemini-topic-btn"
-                        class="btn-base px-6 py-3 bg-fuchsia-600 text-white font-bold rounded-lg text-base tracking-wider
+                    class="flex-grow p-3 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+
+                <button id="generate-gemini-topic-btn" class="btn-base px-6 py-3 bg-fuchsia-600 text-white font-bold rounded-lg text-base tracking-wider
                                shadow-lg shadow-fuchsia-500/50 hover:bg-fuchsia-700 focus:outline-none focus:ring-4 focus:ring-fuchsia-300
-                               active:bg-fuchsia-800"
-                        onclick="generateGeminiQuoteByTopic()">
+                               active:bg-fuchsia-800" onclick="generateGeminiQuoteByTopic()">
                     ✨ Generate by Topic
                 </button>
             </div>
@@ -112,9 +121,13 @@
 
     </div>
 
+    <!-- Load Config (API Key) -->
+    <script src="config.js"></script>
+
     <script>
         // --- GEMINI API SETUP ---
-        const apiKey = ""; // API Key is automatically supplied by the canvas environment
+        // Use key from config.js if available, otherwise fall back to empty string
+        const apiKey = (typeof CONFIG_API_KEY !== 'undefined') ? CONFIG_API_KEY : "";
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
         const MAX_RETRIES = 5;
 
@@ -125,7 +138,7 @@
         const loadingIndicator = document.getElementById('loading-indicator');
         const messageBox = document.getElementById('message-box');
         const topicInput = document.getElementById('topic-input');
-        
+
         // Buttons
         const classicBtn = document.getElementById('generate-classic-btn');
         const randomBtn = document.getElementById('generate-gemini-random-btn');
@@ -266,10 +279,10 @@
             try {
                 const userQuery = "Generate a completely random, universally applicable motivational quote.";
                 const responseJson = await callGeminiApi(userQuery, quoteSchema);
-                
+
                 const quote = responseJson.quote.replace(/^["'“”‘](.*)["'“”’]$/, '$1'); // Remove surrounding quotes if present
                 updateUI(quote, responseJson.author);
-                
+
             } catch (error) {
                 console.error("Gemini Random Quote Error:", error);
                 updateUI("Failed to fetch inspiration.", "Server Error");
@@ -292,7 +305,7 @@
             setButtonsDisabled(true);
             loadingIndicator.classList.remove('hidden');
             messageBox.classList.add('hidden');
-            
+
             const quoteSchema = {
                 type: "OBJECT",
                 properties: {
@@ -305,7 +318,7 @@
             try {
                 const userQuery = `Generate a profound motivational quote specifically about the topic of: ${topic}`;
                 const responseJson = await callGeminiApi(userQuery, quoteSchema);
-                
+
                 const quote = responseJson.quote.replace(/^["'“”‘](.*)["'“”’]$/, '$1'); // Remove surrounding quotes if present
                 updateUI(quote, responseJson.author);
 
@@ -376,4 +389,5 @@
     </script>
 
 </body>
+
 </html>
